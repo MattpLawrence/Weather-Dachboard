@@ -18,3 +18,21 @@ header {
   font-family: ubuntu, sans-serif;
   color: white;
 }
+
+main {
+  float: right;
+  width: 80vw;
+  height: 100vh;
+  border: 2px black solid;
+}
+aside {
+  float: left;
+  width: 80vw;
+  height: 100vh;
+  border: 2px red solid;
+}
+
+.row {
+  border: 2px black solid;
+  height: 5rem;
+}
