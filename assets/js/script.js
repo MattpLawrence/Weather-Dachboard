@@ -66,11 +66,16 @@ function getWeather(lat, lon, name) {
 //pull info about today's weather
 function weatherToday(data) {
   var today = data.daily[0];
-  var todayMaxTemp = "Maximum Temperature:  " + data.daily[0].temp.max + " ᵒF";
+  var todayMaxTemp =
+    "Maximum Temperature:  " +
+    "<strong>" +
+    data.daily[0].temp.max +
+    " ᵒF" +
+    "</strong>";
   var todayMinTemp = "Minimum Temperature:  " + data.daily[0].temp.min + " ᵒF";
   var todayWindSpeed = "Wind Speed:  " + data.daily[0].wind_speed + "MPH";
-  var todayHumidity = data.daily[0].humidity;
-  var todayUVIndex = data.daily[0].uvi;
+  var todayHumidity = "Humidity:  " + data.daily[0].humidity + "%";
+  var todayUVIndex = "UV Index:  " + data.daily[0].uvi;
   var todayWeatherType = "Today we will have: " + data.daily[0].weather[0].main;
   var todayWeatherIcon = data.daily[0].weather[0].icon;
   //put in array to loop through
