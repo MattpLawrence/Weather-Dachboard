@@ -1,6 +1,7 @@
 var key = "168391797cc48918fbec2db27de39874";
 var searchBarListEL = $("#searchBarList");
-
+var searchBarEL = $("#searchBar");
+var searchBtnEL = $("#searchBtn");
 function getWeather(lat, lon) {
   var part = "alerts";
   var unit = "imperial";
@@ -18,10 +19,9 @@ function getWeather(lat, lon) {
     });
 }
 
-getLocation();
+// getLocation(city);
 
-function getLocation() {
-  var city = "atlanta";
+function getLocation(city) {
   const settings = {
     async: true,
     crossDomain: true,
@@ -45,3 +45,18 @@ function getLocation() {
     getWeather(lat, lon);
   });
 }
+
+// on search button press take city name and run get location function
+$(searchBtnEL).on("click", function (e) {
+  var city = searchBar.value;
+  searchBar.value = textValue;
+  getLocation(city);
+});
+//on enter key press while in search bar run get location function
+$(searchBarEL).on("keyup", function (e) {
+  if (e.which == 13) {
+    var city = searchBar.value;
+    console.log(city);
+    getLocation(city);
+  }
+});
