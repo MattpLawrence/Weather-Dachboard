@@ -1,6 +1,6 @@
 :root {
   --blue: rgba(46, 66, 114, 1); /* Main Primary color */
-  --lightestBlue: rgba(120, 135, 171, 1);
+  --lightestBlue: rgb(173, 207, 252);
   --lightBlue: rgba(79, 98, 142, 1);
   --darkBlue: rgba(22, 41, 85, 1);
   --darkestBlue: rgba(6, 21, 57, 1);
@@ -8,31 +8,73 @@
 
 * {
   margin: 0;
-  font-family: ubuntu, sans-serif;
 }
 /* *******************************Header****************** */
 header {
   height: 5rem;
   background-color: var(--blue);
   padding: 1rem;
-  font-family: ubuntu, sans-serif;
+  font-family: "Ubuntu", sans-serif;
   color: white;
 }
-
-main {
+/* *******************************Main****************** */
+#main {
   float: right;
   width: 80vw;
   height: 100vh;
   border: 2px black solid;
 }
-aside {
-  float: left;
-  width: 80vw;
+#sideBar {
   height: 100vh;
   border: 2px red solid;
 }
 
-.row {
+/* .row {
   border: 2px black solid;
   height: 5rem;
+} */
+
+/* *******************************Side bar****************** */
+.input-group {
+  display: block;
+  margin: 1px auto;
+}
+#searchBar {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+}
+#searchBtn {
+  display: block;
+  width: 80%;
+  margin: 1px auto;
+  border: 3px var(--blue) solid;
+  font-family: "Ubuntu", sans-serif;
+  color: var(--lightBlue);
+}
+#searchBtn:hover {
+  background-color: var(--lightestBlue);
+}
+
+.col-2 {
+  border: 2px black solid;
+  margin-left: auto;
+  height: 100%;
+}
+#weatherNow {
+  border: 2px yellow solid;
+  height: 50%;
+}
+#weatherFiveDay {
+  border: 2px pink solid;
+  height: 50%;
+}
+
+#weatherDays {
+  height: 80%;
+}
+
+#fiveDayLabel {
+  margin-left: 3rem;
+  height: auto;
 }
