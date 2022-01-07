@@ -83,23 +83,20 @@ function weatherToday(data) {
     todayHumidity,
     todayUVIndex,
   ];
-  console.log(data);
-  console.log(today);
-  console.log(todayList);
-  console.log("max temp = " + todayMaxTemp);
-  console.log("min temp = " + todayMinTemp);
-  console.log("wind speed = " + todayWindSpeed);
-  console.log("humidity = " + todayHumidity);
-  console.log("UV index = " + todayUVIndex);
-  console.log("Weather description = " + todayWeatherType);
-  console.log("Weather icon = " + todayWeatherIcon);
-
+  //for each item make a list item
   $.each(todayList, function (i, val) {
     console.log(val);
     var weatherTodayLI = $("<li>").text(val).attr("class", "weatherTodayLI");
     $("#weatherTodayUL").append(weatherTodayLI);
   });
+  //add weather icon
+  var todayIconURL = $("<img id = 'icon'>").attr(
+    "src",
+    "http://openweathermap.org/img/w/" + todayWeatherIcon + ".png"
+  );
+  $("#todayCityDiv").append(todayIconURL);
 }
+// show the city in the today section
 function todayLabel(name) {
   console.log(name);
   var todayCity = $("<h2>").text(name).attr("id", "todayCity");
