@@ -73,3 +73,23 @@ header {
   margin-left: 3rem;
   height: auto;
 }
+
+#searchHistoryLabel {
+  text-align: center;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+}
+#searchBarList {
+  padding-left: 0;
+}
+.searchHistoryLI {
+  display: block;
+  list-style-type: none;
+  text-align: center;
+  padding-left: 0;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.5rem;
+}
+.searchHistoryLI:hover {
+  background-color: var(--lightestBlue);
+}

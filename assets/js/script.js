@@ -55,13 +55,13 @@ function getLocation(searchVal) {
 var pastSearches = [];
 
 function saveSearchHistory(searchVal) {
-  $("#searchHistoryLabel").css("display", "initial");
+  $("#searchHistoryLabel").css("display", "block");
   if (localStorage["pastSearches"]) {
     pastSearches = JSON.parse(localStorage["pastSearches"]);
   }
   if (pastSearches.indexOf(searchVal) == -1) {
     pastSearches.unshift(searchVal);
-    if (pastSearches.length > 5) {
+    if (pastSearches.length > 10) {
       pastSearches.pop();
     }
     localStorage["pastSearches"] = JSON.stringify(pastSearches);
@@ -76,7 +76,9 @@ function drawPastSearches() {
   if (pastSearches.length) {
     console.log(pastSearches);
     $.each(pastSearches, function (i, val) {
-      var searchHistoryLI = $(`<li>`).text(val).attr("class", "historyBtn");
+      var searchHistoryLI = $(`<li>`)
+        .text(val)
+        .attr("class", "searchHistoryLI");
       searchBarListEL.append(searchHistoryLI);
     });
   }
@@ -111,4 +113,11 @@ $(searchBarEL).on("keyup", function (e) {
     getLocation(searchVal);
     saveSearchHistory(searchVal);
   }
+});
+//when search history item is clicked, search it again
+$(searchBarListEL).on("click", function (e) {
+  var textValue = e.target.innerText;
+  console.log(textValue);
+  var searchVal = textValue;
+  getLocation(searchVal);
 });
