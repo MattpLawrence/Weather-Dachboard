@@ -77,10 +77,25 @@ header {
   height: 80%;
 }
 #weatherToday {
+  display: block;
   border: 2px yellow solid;
   height: 50%;
 }
+#todayLabel {
+  padding-top: 20px;
+  padding-left: 40px;
+  margin: 0;
+}
+#todayCity {
+  margin: 5px 0;
+  padding-left: 40px;
+  font-size: 1.8rem;
+}
+#weatherTodayUL {
+  margin: 0;
+}
 .weatherTodayLI {
+  margin: 3px 0;
   list-style-type: none;
   color: var(--darkestBlue);
   font-size: 1.4rem;

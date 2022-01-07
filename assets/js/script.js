@@ -30,48 +30,44 @@ function getWeather(lat, lon, name) {
   // });
 }
 // ***********************************get location data***********************
-// function getLocation(searchVal) {
-//   const settings = {
-//     async: true,
-//     crossDomain: true,
-//     url: `https://spott.p.rapidapi.com/places/autocomplete?limit=5&skip=0&country=US%2CCA&q=${searchVal}&type=CITY`,
-//     method: "GET",
-//     headers: {
-//       "x-rapidapi-host": "spott.p.rapidapi.com",
-//       "x-rapidapi-key": "4358a3ae45msh1ef514db96f084bp1426f0jsn143dce70b436",
-//     },
-//   };
+function getLocation(searchVal) {
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url: `https://spott.p.rapidapi.com/places/autocomplete?limit=5&skip=0&country=US%2CCA&q=${searchVal}&type=CITY`,
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "spott.p.rapidapi.com",
+      "x-rapidapi-key": "4358a3ae45msh1ef514db96f084bp1426f0jsn143dce70b436",
+    },
+  };
 
-//   $.getJSON(settings, function (data) {
-//     try {
-//       console.log(data);
-//       var timeZone = data[0].timezoneId;
-//       var name = data[0].name;
-//       var lat = data[0].coordinates.latitude;
-//       var lon = data[0].coordinates.longitude;
-//       console.log(lat);
-//       console.log(lon);
-//       console.log(name);
-//       console.log(timeZone);
-//       getWeather(lat, lon, name);
-//     } catch {
-//       console.log("no city found");
-//       searchBarEL.text = "";
-//     }
-//   });
-// }
+  $.getJSON(settings, function (data) {
+    try {
+      console.log(data);
+      var timeZone = data[0].timezoneId;
+      var name = data[0].name;
+      var lat = data[0].coordinates.latitude;
+      var lon = data[0].coordinates.longitude;
+      console.log(lat);
+      console.log(lon);
+      console.log(name);
+      console.log(timeZone);
+      getWeather(lat, lon, name);
+      todayLabel(name);
+    } catch {
+      console.log("no city found");
+      searchBarEL.text = "";
+    }
+  });
+}
 
 // *****************************show todays forecast in main window***************
 
 //pull info about today's weather
 function weatherToday(data) {
   var today = data.daily[0];
-  var todayMaxTemp =
-    "Maximum Temperature:  " +
-    "<strong>" +
-    data.daily[0].temp.max +
-    " ᵒF" +
-    "</strong>";
+  var todayMaxTemp = "Maximum Temperature:  " + data.daily[0].temp.max + " ᵒF";
   var todayMinTemp = "Minimum Temperature:  " + data.daily[0].temp.min + " ᵒF";
   var todayWindSpeed = "Wind Speed:  " + data.daily[0].wind_speed + "MPH";
   var todayHumidity = "Humidity:  " + data.daily[0].humidity + "%";
@@ -103,6 +99,11 @@ function weatherToday(data) {
     var weatherTodayLI = $("<li>").text(val).attr("class", "weatherTodayLI");
     $("#weatherTodayUL").append(weatherTodayLI);
   });
+}
+function todayLabel(name) {
+  console.log(name);
+  var todayCity = $("<h2>").text(name).attr("id", "todayCity");
+  $("#todayCityDiv").append(todayCity);
 }
 
 // *****************************search history*********************
@@ -155,8 +156,8 @@ function historyOnLoad(e) {
 $(searchBtnEL).on("click", function (e) {
   var searchVal = searchBar.value;
   searchBarListEL.empty();
-  // getLocation(searchVal);
-  getWeather();
+  getLocation(searchVal);
+  // getWeather();
   saveSearchHistory(searchVal);
 });
 //on enter key press while in search bar run get location function
@@ -165,8 +166,8 @@ $(searchBarEL).on("keyup", function (e) {
     var searchVal = searchBar.value;
     searchBarListEL.empty();
     console.log(searchVal);
-    // getLocation(searchVal);
-    getWeather();
+    getLocation(searchVal);
+    // getWeather();
     saveSearchHistory(searchVal);
   }
 });
@@ -175,6 +176,6 @@ $(searchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   console.log(textValue);
   var searchVal = textValue;
-  // getLocation(searchVal);
-  getWeather();
+  getLocation(searchVal);
+  // getWeather();
 });
