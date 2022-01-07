@@ -29,11 +29,6 @@ header {
   border: 2px red solid;
 }
 
-/* .row {
-  border: 2px black solid;
-  height: 5rem;
-} */
-
 /* *******************************Side bar****************** */
 .input-group {
   display: block;
@@ -59,7 +54,7 @@ header {
 .col-2 {
   border: 2px black solid;
   margin-left: auto;
-  height: 100%;
+  height: 80%;
 }
 #weatherNow {
   border: 2px yellow solid;

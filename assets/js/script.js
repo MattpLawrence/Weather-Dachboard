@@ -1,5 +1,5 @@
 var key = "168391797cc48918fbec2db27de39874";
-
+var searchBarListEL = $("#searchBarList");
 getWeather();
 
 function getWeather() {
@@ -23,21 +23,24 @@ function getWeather() {
 
 getLocation();
 
-//*****************location APi */
 function getLocation() {
   var city = "atlanta";
   const settings = {
     async: true,
     crossDomain: true,
-    url: `https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&country=US%2CCA&q=${city}&type=CITY`,
+    url: `https://spott.p.rapidapi.com/places/autocomplete?limit=5&skip=0&country=US%2CCA&q=${city}&type=CITY`,
     method: "GET",
     headers: {
       "x-rapidapi-host": "spott.p.rapidapi.com",
       "x-rapidapi-key": "4358a3ae45msh1ef514db96f084bp1426f0jsn143dce70b436",
     },
   };
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
+  $.getJSON(settings, function (data) {
+    console.log(data[1].name);
+    for (var i = 0; i < data.length; i++) {
+      console.log(data[i].name);
+    }
+    var city = data;
+    console.log(city);
   });
 }
