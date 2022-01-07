@@ -1,10 +1,7 @@
 var key = "168391797cc48918fbec2db27de39874";
 var searchBarListEL = $("#searchBarList");
-getWeather();
 
-function getWeather() {
-  var lat = "33.748995";
-  var lon = "-84.387982";
+function getWeather(lat, lon) {
   var part = "alerts";
   var unit = "imperial";
   fetch(
@@ -36,11 +33,15 @@ function getLocation() {
     },
   };
   $.getJSON(settings, function (data) {
-    console.log(data[1].name);
-    for (var i = 0; i < data.length; i++) {
-      console.log(data[i].name);
-    }
-    var city = data;
-    console.log(city);
+    console.log(data);
+    var timeZone = data[0].timezoneId;
+    var name = data[0].name;
+    var lat = data[0].coordinates.latitude;
+    var lon = data[0].coordinates.longitude;
+    console.log(lat);
+    console.log(lon);
+    console.log(name);
+    console.log(timeZone);
+    getWeather(lat, lon);
   });
 }
