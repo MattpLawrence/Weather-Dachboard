@@ -31,6 +31,7 @@ function getWeather(lat, lon, name) {
 }
 // ***********************************get location data***********************
 function getLocation(searchVal) {
+  $("#spinner").css("display", "flex"); //start spinner
   const settings = {
     async: true,
     crossDomain: true,
@@ -95,6 +96,7 @@ function weatherToday(data) {
     "http://openweathermap.org/img/w/" + todayWeatherIcon + ".png"
   );
   $("#todayCityDiv").append(todayIconURL);
+  $("#spinner").css("display", "none"); //stop spinner
 }
 // show the city in the today section
 function todayLabel(name) {

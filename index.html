@@ -21,12 +21,17 @@
   </header>
   <div class="container">
     <div class="row">
-      <div class="col-3" id="sideBar">Search By City
+      <div class="col-3" id="sideBar"><h2 class="centerLabel" >Search By City</h2>
         <div class="input-group">
           <input type="search" class="form-control rounded" id="searchBar" placeholder="City" aria-label="Search"
           aria-describedby="search-addon" />
-          <button type="button" class="btn btn-outline-primary" id="searchBtn">Search</button>
-          <h2 id="searchHistoryLabel">Previous Cities:</h2>
+          <div id="buttonSpinner">
+            <button type="button" class="btn btn-outline-primary" id="searchBtn">Search</button>
+            <div class="spinner-border" role="status" id="spinner">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <h2 class="centerLabel">Previous Cities:</h2>
           <ul id="searchBarList"></ul>
         </div>
       </div>

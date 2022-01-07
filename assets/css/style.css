@@ -30,6 +30,12 @@ header {
 }
 
 /* *******************************Side bar****************** */
+
+.centerLabel {
+  text-align: center;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+}
 .input-group {
   display: block;
   margin: 1px auto;
@@ -38,6 +44,14 @@ header {
   display: block;
   width: 100%;
   margin: 10px auto;
+}
+#buttonSpinner {
+  display: flex;
+  transition: 2s;
+}
+#spinner {
+  display: none;
+  margin: auto;
 }
 #searchBtn {
   display: block;
@@ -52,12 +66,6 @@ header {
 }
 #searchBarList {
   padding-left: 0;
-}
-
-#searchHistoryLabel {
-  text-align: center;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: bold;
 }
 .searchHistoryLI {
   display: block;
