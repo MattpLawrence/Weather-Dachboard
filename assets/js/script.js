@@ -2,33 +2,7 @@ var key = "168391797cc48918fbec2db27de39874";
 var searchBarListEL = $("#searchBarList");
 var searchBarEL = $("#searchBar");
 var searchBtnEL = $("#searchBtn");
-var weatherTodayEl = $("#weatherToday");
-// var weatherTodayUL = $("#weatherTodayUL");
 
-//****************************Get weather data***************** */
-function getWeather(lat, lon, name) {
-  var part = "alerts";
-  var unit = "imperial";
-  var name = "Seattle";
-  var lat = "47.6062";
-  var lon = "-122.332";
-  fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&units=${unit}&appid=${key}`
-  )
-    .then(function (response) {
-      if (!response.ok) {
-        throw response.json();
-      }
-      return response.json();
-    })
-    .then(function (data) {
-      weatherToday(data);
-      weatherFiveDay(data);
-    });
-  // .catch(function (error) {
-  //   console.error(error);
-  // });
-}
 // ***********************************get location data***********************
 function getLocation(searchVal) {
   $("#spinner").css("display", "flex"); //start spinner
@@ -50,13 +24,34 @@ function getLocation(searchVal) {
       var lat = data[0].coordinates.latitude;
       var lon = data[0].coordinates.longitude;
       $("#todayCityDiv").empty(); //clear DOM from past searches
-      getWeather(lat, lon, name);
+      getWeather(lat, lon);
       todayLabel(name);
     } catch {
       console.log("no city found");
       searchBarEL.text = "";
     }
   });
+}
+//****************************Get weather data***************** */
+function getWeather(lat, lon) {
+  var part = "alerts";
+  var unit = "imperial";
+  fetch(
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&units=${unit}&appid=${key}`
+  )
+    .then(function (response) {
+      if (!response.ok) {
+        throw response.json();
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      weatherToday(data);
+      weatherFiveDay(data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 }
 
 // *****************************show todays forecast in main window***************
@@ -83,7 +78,6 @@ function weatherToday(data) {
   ];
   //retrieve date
   var unixFormat = moment.unix(todayDate).format("dddd MMM Do, YYYY");
-  console.log(unixFormat);
   var todayCity = $("<h2>").text(unixFormat).attr("id", "todayCity");
   $("#todayCityDiv").append(todayCity);
   //for each item make a list item
@@ -112,7 +106,6 @@ function todayLabel(name) {
 // *****************************Show five day weather forecast.
 
 function weatherFiveDay(data) {
-  console.log(data);
   var fiveDay = [
     data.daily[1],
     data.daily[2],
@@ -121,7 +114,6 @@ function weatherFiveDay(data) {
     data.daily[5],
   ];
   $.each(fiveDay, function (i, val) {
-    console.log(val);
     var date = val.dt;
     var dateNumber = i + 1;
     var weatherIcon = val.weather[0].icon;
@@ -136,7 +128,6 @@ function weatherFiveDay(data) {
     $(dayBox).empty(); //empty in case a search was already performed
     //get day date for forecast
     var unixFormat = moment.unix(date).format("dddd");
-    console.log(unixFormat);
     var dateDisplay = $("<h3>").text(unixFormat).attr("class", "fiveDate");
     $(dayBox).append(dateDisplay);
     //push weather icon image to 5 day box
@@ -191,9 +182,22 @@ function historyOnLoad(e) {
     drawPastSearches();
   } catch {
     $("#searchHistoryLabel").css("display", "none");
-    console.log("no past searches");
   }
 }
+//*****************************on load*************** */
+//on load go to last history results, or default to atlanta
+$(document).ready(function () {
+  //catch error if no local storage can be parsed
+  try {
+    pastSearches = JSON.parse(localStorage["pastSearches"]);
+    var lastVal = pastSearches[0]; //get last search from local storage
+    getLocation(lastVal);
+  } catch {
+    //if no local storage default to atlanta
+    var initVal = "Atlanta";
+    getLocation(initVal);
+  }
+});
 
 // ******************************event functions*****************
 
@@ -202,7 +206,6 @@ $(searchBtnEL).on("click", function (e) {
   var searchVal = searchBar.value;
   searchBarListEL.empty();
   getLocation(searchVal);
-  // getWeather();
   saveSearchHistory(searchVal);
 });
 //on enter key press while in search bar run get location function
@@ -211,7 +214,6 @@ $(searchBarEL).on("keyup", function (e) {
     var searchVal = searchBar.value;
     searchBarListEL.empty();
     getLocation(searchVal);
-    // getWeather();
     saveSearchHistory(searchVal);
   }
 });
@@ -220,5 +222,4 @@ $(searchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   var searchVal = textValue;
   getLocation(searchVal);
-  // getWeather();
 });

@@ -18,6 +18,7 @@ header {
   color: white;
 }
 /* *******************************Main****************** */
+
 #main {
   float: right;
   width: 80vw;
@@ -26,7 +27,7 @@ header {
 }
 #sideBar {
   height: 100vh;
-  border: 2px red solid;
+  /* border: 2px red solid; */
 }
 
 /* *******************************Side bar****************** */
@@ -86,7 +87,7 @@ header {
 }
 #weatherToday {
   display: block;
-  border: 2px yellow solid;
+  border: 2px black solid;
   height: 50%;
 }
 #todayLabel {
@@ -117,7 +118,7 @@ header {
 }
 /* ****************************five day forecast************************** */
 #weatherFiveDay {
-  border: 2px pink solid;
+  /* border: 2px pink solid; */
   height: 50%;
 }
 
