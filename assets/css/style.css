@@ -17,20 +17,12 @@ header {
   font-family: "Ubuntu", sans-serif;
   color: white;
 }
-/* *******************************Main****************** */
-
-#main {
-  float: right;
-  width: 80vw;
-  height: 100vh;
-  border: 2px black solid;
-}
-#sideBar {
-  height: 100vh;
-  /* border: 2px red solid; */
-}
 
 /* *******************************Side bar****************** */
+
+#sideBar {
+  height: 100vh;
+}
 
 .centerLabel {
   text-align: center;
@@ -81,13 +73,14 @@ header {
 }
 /* **************************today section******************************** */
 .col-2 {
-  border: 2px black solid;
+  border: 2px var(--blue) solid;
   margin-left: auto;
   height: 80%;
 }
 #weatherToday {
   display: block;
-  border: 2px black solid;
+  border: 2px var(--blue) solid;
+  border-top: none;
   height: 50%;
 }
 #todayLabel {

@@ -103,7 +103,7 @@ function todayLabel(name) {
   $("#todayCityDiv").append(todayCity);
 }
 
-// *****************************Show five day weather forecast.
+// *****************************Show five day weather forecast.*******************
 
 function weatherFiveDay(data) {
   var fiveDay = [
@@ -184,7 +184,7 @@ function historyOnLoad(e) {
     $("#searchHistoryLabel").css("display", "none");
   }
 }
-//*****************************on load*************** */
+//******************************************on load****************************
 //on load go to last history results, or default to atlanta
 $(document).ready(function () {
   //catch error if no local storage can be parsed
@@ -199,7 +199,7 @@ $(document).ready(function () {
   }
 });
 
-// ******************************event functions*****************
+// ************************************************event functions*****************
 
 // on search button press take city name and run get location function
 $(searchBtnEL).on("click", function (e) {
