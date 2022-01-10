@@ -1,4 +1,4 @@
-# Weather-Dachboard
+# Weather-Dashboard
 
 Simple one page dashboard to show the upcoming weather forecast.
 
