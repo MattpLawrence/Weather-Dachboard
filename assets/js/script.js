@@ -58,7 +58,6 @@ function getWeather(lat, lon) {
 
 //pull info about today's weather
 function weatherToday(data) {
-  var today = data.daily[0];
   var todayMaxTemp = "Maximum Temperature:  " + data.daily[0].temp.max + " ᵒF";
   var todayMinTemp = "Minimum Temperature:  " + data.daily[0].temp.min + " ᵒF";
   var todayWindSpeed = "Wind Speed:  " + data.daily[0].wind_speed + "MPH";

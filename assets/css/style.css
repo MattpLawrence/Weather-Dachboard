@@ -16,6 +16,7 @@ header {
   padding: 1rem;
   font-family: "Ubuntu", sans-serif;
   color: white;
+  margin-bottom: 2rem;
 }
 
 /* *******************************Side bar****************** */
@@ -80,7 +81,6 @@ header {
 #weatherToday {
   display: block;
   border: 2px var(--blue) solid;
-  border-top: none;
   height: 50%;
 }
 #todayLabel {
