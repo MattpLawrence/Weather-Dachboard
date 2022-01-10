@@ -140,8 +140,12 @@ function weatherFiveDay(data) {
     console.log(windSpeed);
     console.log(humidity);
     var dayBox = $(`#day${dateNumber}`);
-    // var dayBox = `"#day${dateNumber}"`;
-    console.log(dayBox);
+    //push weather icon image to 5 day box
+    var iconURL = $("<img class = 'iconFive'>").attr(
+      "src",
+      "http://openweathermap.org/img/w/" + weatherIcon + ".png"
+    );
+    $(dayBox).append(iconURL);
     // loop through to add list item to each card
     $.each(dayList, function (i, val) {
       var weatherLI = $("<li>").text(val).attr("class", "weatherLI");

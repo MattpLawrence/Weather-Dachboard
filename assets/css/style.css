@@ -141,3 +141,7 @@ header {
   font-size: 0.8rem;
   font-weight: 500;
 }
+#iconFive {
+  display: block;
+  margin-right: 40px;
+}
