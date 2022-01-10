@@ -46,10 +46,10 @@ function getLocation(searchVal) {
   $.getJSON(settings, function (data) {
     try {
       console.log(data);
-      var timeZone = data[0].timezoneId;
       var name = data[0].name;
       var lat = data[0].coordinates.latitude;
       var lon = data[0].coordinates.longitude;
+      $("#todayCityDiv").empty(); //clear DOM from past searches
       getWeather(lat, lon, name);
       todayLabel(name);
     } catch {
@@ -87,6 +87,7 @@ function weatherToday(data) {
   var todayCity = $("<h2>").text(unixFormat).attr("id", "todayCity");
   $("#todayCityDiv").append(todayCity);
   //for each item make a list item
+  $("#weatherTodayUL").empty(); //clean up after last append
   $.each(todayList, function (i, val) {
     var weatherTodayLI = $("<li>").text(val).attr("class", "weatherTodayLI");
     $("#weatherTodayUL").append(weatherTodayLI);
@@ -96,6 +97,7 @@ function weatherToday(data) {
     "src",
     "http://openweathermap.org/img/w/" + todayWeatherIcon + ".png"
   );
+
   $("#todayCityDiv").append(todayIconURL);
   $("#spinner").css("display", "none"); //stop spinner
 }
@@ -129,15 +131,9 @@ function weatherFiveDay(data) {
     var humidity = "Humidity: " + val.humidity + "%";
     //put in array to loop through
     var dayList = [maxTemp, minTemp, windSpeed, humidity];
-    console.log(date);
-    console.log(dateNumber);
-    console.log(weatherIcon);
-    console.log(maxTemp);
-    console.log(minTemp);
-    console.log(windSpeed);
-    console.log(humidity);
     //set parent container to be appended
     var dayBox = $(`#day${dateNumber}`);
+    $(dayBox).empty(); //empty in case a search was already performed
     //get day date for forecast
     var unixFormat = moment.unix(date).format("dddd");
     console.log(unixFormat);
