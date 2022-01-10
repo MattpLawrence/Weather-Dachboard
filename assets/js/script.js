@@ -58,12 +58,7 @@ function getLocation(searchVal) {
     }
   });
 }
-// ***************************Get dates********************
-// unixDate();
-function unixDate(date) {
-  var unixFormat = moment.unix(date).format("dddd MMM Do, YYYY");
-  console.log(unixFormat);
-}
+
 // *****************************show todays forecast in main window***************
 
 //pull info about today's weather
@@ -125,6 +120,7 @@ function weatherFiveDay(data) {
   ];
   $.each(fiveDay, function (i, val) {
     console.log(val);
+    var date = val.dt;
     var dateNumber = i + 1;
     var weatherIcon = val.weather[0].icon;
     var maxTemp = "Max Temp: " + val.temp.max + " ᵒF";
@@ -133,13 +129,20 @@ function weatherFiveDay(data) {
     var humidity = "Humidity: " + val.humidity + "%";
     //put in array to loop through
     var dayList = [maxTemp, minTemp, windSpeed, humidity];
+    console.log(date);
     console.log(dateNumber);
     console.log(weatherIcon);
     console.log(maxTemp);
     console.log(minTemp);
     console.log(windSpeed);
     console.log(humidity);
+    //set parent container to be appended
     var dayBox = $(`#day${dateNumber}`);
+    //get day date for forecast
+    var unixFormat = moment.unix(date).format("dddd");
+    console.log(unixFormat);
+    var dateDisplay = $("<h3>").text(unixFormat).attr("class", "fiveDate");
+    $(dayBox).append(dateDisplay);
     //push weather icon image to 5 day box
     var iconURL = $("<img class = 'iconFive'>").attr(
       "src",

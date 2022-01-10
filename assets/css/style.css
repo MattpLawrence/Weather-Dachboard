@@ -134,22 +134,31 @@ header {
   height: auto;
 }
 
+.fiveDate {
+  font-size: 1.2em;
+  text-align: center;
+  width: 100%;
+}
+
 .weatherLI {
-  margin-left: -30px;
+  margin: 7px auto;
   list-style-type: none;
   color: var(--darkestBlue);
   font-size: 0.8rem;
   font-weight: 500;
+  width: 100%;
 }
 .iconFive {
   display: block;
-  margin-right: 40px;
+  margin: 0 auto;
   justify-content: center;
 }
 
 .col-2 {
-  display: flex;
+  display: block;
   align-content: center;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  padding: 8px;
 }
