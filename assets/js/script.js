@@ -22,12 +22,12 @@ function getWeather(lat, lon, name) {
       return response.json();
     })
     .then(function (data) {
-      console.log("first call");
       weatherToday(data);
+      weatherFiveDay(data);
+    })
+    .catch(function (error) {
+      console.error(error);
     });
-  // .catch(function (error) {
-  //   console.error(error);
-  // });
 }
 // ***********************************get location data***********************
 function getLocation(searchVal) {
@@ -50,10 +50,6 @@ function getLocation(searchVal) {
       var name = data[0].name;
       var lat = data[0].coordinates.latitude;
       var lon = data[0].coordinates.longitude;
-      console.log(lat);
-      console.log(lon);
-      console.log(name);
-      console.log(timeZone);
       getWeather(lat, lon, name);
       todayLabel(name);
     } catch {
@@ -62,7 +58,12 @@ function getLocation(searchVal) {
     }
   });
 }
-
+// ***************************Get dates********************
+unixDate();
+function unixDate(date) {
+  var unixFormat = moment.unix(date).format("dddd MMM Do, YYYY");
+  console.log(unixFormat);
+}
 // *****************************show todays forecast in main window***************
 
 //pull info about today's weather
@@ -75,6 +76,7 @@ function weatherToday(data) {
   var todayUVIndex = "UV Index:  " + data.daily[0].uvi;
   var todayWeatherType = "Today we will have: " + data.daily[0].weather[0].main;
   var todayWeatherIcon = data.daily[0].weather[0].icon;
+  var todayDate = data.daily[0].dt;
   //put in array to loop through
   var todayList = [
     todayWeatherType,
@@ -84,6 +86,11 @@ function weatherToday(data) {
     todayHumidity,
     todayUVIndex,
   ];
+  //retrieve date
+  var unixFormat = moment.unix(todayDate).format("dddd MMM Do, YYYY");
+  console.log(unixFormat);
+  var todayCity = $("<h2>").text(unixFormat).attr("id", "todayCity");
+  $("#todayCityDiv").append(todayCity);
   //for each item make a list item
   $.each(todayList, function (i, val) {
     console.log(val);
@@ -98,12 +105,18 @@ function weatherToday(data) {
   $("#todayCityDiv").append(todayIconURL);
   $("#spinner").css("display", "none"); //stop spinner
 }
-// show the city in the today section
-function todayLabel(name) {
+// show the city and date in the today section
+function todayLabel(name, date) {
   console.log(name);
-  var todayCity = $("<h2>").text(name).attr("id", "todayCity");
+  var todayCity = $("<h2>")
+    .text(name + ":")
+    .attr("id", "todayCity");
   $("#todayCityDiv").append(todayCity);
 }
+
+// *****************************Show five day weather forecast.
+
+function weatherFiveDay(data) {}
 
 // *****************************search history*********************
 var pastSearches = [];
