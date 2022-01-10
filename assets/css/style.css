@@ -135,13 +135,21 @@ header {
 }
 
 .weatherLI {
-  margin-left: -50px;
+  margin-left: -30px;
   list-style-type: none;
   color: var(--darkestBlue);
   font-size: 0.8rem;
   font-weight: 500;
 }
-#iconFive {
+.iconFive {
   display: block;
   margin-right: 40px;
+  justify-content: center;
+}
+
+.col-2 {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
