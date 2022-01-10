@@ -24,10 +24,10 @@ function getWeather(lat, lon, name) {
     .then(function (data) {
       weatherToday(data);
       weatherFiveDay(data);
-    })
-    .catch(function (error) {
-      console.error(error);
     });
+  // .catch(function (error) {
+  //   console.error(error);
+  // });
 }
 // ***********************************get location data***********************
 function getLocation(searchVal) {
@@ -59,7 +59,7 @@ function getLocation(searchVal) {
   });
 }
 // ***************************Get dates********************
-unixDate();
+// unixDate();
 function unixDate(date) {
   var unixFormat = moment.unix(date).format("dddd MMM Do, YYYY");
   console.log(unixFormat);
@@ -93,7 +93,6 @@ function weatherToday(data) {
   $("#todayCityDiv").append(todayCity);
   //for each item make a list item
   $.each(todayList, function (i, val) {
-    console.log(val);
     var weatherTodayLI = $("<li>").text(val).attr("class", "weatherTodayLI");
     $("#weatherTodayUL").append(weatherTodayLI);
   });
@@ -106,8 +105,7 @@ function weatherToday(data) {
   $("#spinner").css("display", "none"); //stop spinner
 }
 // show the city and date in the today section
-function todayLabel(name, date) {
-  console.log(name);
+function todayLabel(name) {
   var todayCity = $("<h2>")
     .text(name + ":")
     .attr("id", "todayCity");
@@ -116,7 +114,41 @@ function todayLabel(name, date) {
 
 // *****************************Show five day weather forecast.
 
-function weatherFiveDay(data) {}
+function weatherFiveDay(data) {
+  console.log(data);
+  var fiveDay = [
+    data.daily[1],
+    data.daily[2],
+    data.daily[3],
+    data.daily[4],
+    data.daily[5],
+  ];
+  $.each(fiveDay, function (i, val) {
+    console.log(val);
+    var dateNumber = i + 1;
+    var weatherIcon = val.weather[0].icon;
+    var maxTemp = "Max Temp: " + val.temp.max + " ᵒF";
+    var minTemp = "Min Temp: " + val.temp.min + " ᵒF";
+    var windSpeed = "Wind Speed: " + val.wind_speed + "MPH";
+    var humidity = "Humidity: " + val.humidity + "%";
+    //put in array to loop through
+    var dayList = [maxTemp, minTemp, windSpeed, humidity];
+    console.log(dateNumber);
+    console.log(weatherIcon);
+    console.log(maxTemp);
+    console.log(minTemp);
+    console.log(windSpeed);
+    console.log(humidity);
+    var dayBox = $(`#day${dateNumber}`);
+    // var dayBox = `"#day${dateNumber}"`;
+    console.log(dayBox);
+    // loop through to add list item to each card
+    $.each(dayList, function (i, val) {
+      var weatherLI = $("<li>").text(val).attr("class", "weatherLI");
+      $(dayBox).append(weatherLI);
+    });
+  });
+}
 
 // *****************************search history*********************
 var pastSearches = [];
@@ -141,7 +173,6 @@ function drawPastSearches() {
   pastSearches = JSON.parse(localStorage["pastSearches"]); //retrieve from local storage
 
   if (pastSearches.length) {
-    console.log(pastSearches);
     $.each(pastSearches, function (i, val) {
       var searchHistoryLI = $(`<li>`)
         .text(val)
@@ -155,7 +186,6 @@ historyOnLoad();
 function historyOnLoad(e) {
   try {
     drawPastSearches();
-    console.log("post searches");
   } catch {
     $("#searchHistoryLabel").css("display", "none");
     console.log("no past searches");
@@ -177,7 +207,6 @@ $(searchBarEL).on("keyup", function (e) {
   if (e.which == 13) {
     var searchVal = searchBar.value;
     searchBarListEL.empty();
-    console.log(searchVal);
     getLocation(searchVal);
     // getWeather();
     saveSearchHistory(searchVal);
@@ -186,7 +215,6 @@ $(searchBarEL).on("keyup", function (e) {
 //when search history item is clicked, search it again
 $(searchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
-  console.log(textValue);
   var searchVal = textValue;
   getLocation(searchVal);
   // getWeather();

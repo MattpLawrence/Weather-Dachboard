@@ -125,7 +125,19 @@ header {
   height: 80%;
 }
 
+#weatherDays ul li {
+  margin-top: 10px;
+}
+
 #fiveDayLabel {
   margin-left: 3rem;
   height: auto;
+}
+
+.weatherLI {
+  margin-left: -50px;
+  list-style-type: none;
+  color: var(--darkestBlue);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
