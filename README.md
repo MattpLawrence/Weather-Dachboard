@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-GT boot camp homework number 4. Website using JS, CSS, and HTML to set a timed quiz.
+Single page dashboard where you can search by city to display the upcoming weather.
 
 ## Host Location:
 
@@ -8,31 +8,28 @@ https://mattplawrence.github.io/Weather-Dashboard/
 
 ## Purpose:
 
-The purpose of this project was to create an online quiz to test our knowledge of coding, and our ability to create an application with JavaScript.
+The purpose of this project was to create an quick and simple website to see current and upcoming weather in a city of interest.
 
 ## Problem:
 
-The problem is to find a way to use the DOM to actively update the web page with new information and elements.
+The problem is to find a way to use the third party API's to retrieve location and weather data for the requested city.
 
 ### The problems encountered include:
 
-- Use CSS and HTML to create and format a landing page for a quiz.
-- Use JavaScript to accept name input from the landing page.
-- Use javascript to execute functionality on form submit.
-- Manipulate the DOM to change the format and information presented on the web page.
-- Use JavaScript logic to show questions and answers on a random order without repeating any questions.
-- Run a timer that execute functionality upon reaching zero.
-- Take input from the user to check there answer for correctness and keep score of correct answers.
-- Use the local storage to keep information on scores and user names
-- Compare the current score with the high score.
-- Have a button press restart the quiz.
+- The API that returns weather take coordinates as input, not cities. I had to find an additional API to search by city.
+- Link the data from the two API calls to work with each other.
+- Separate and return the desirable data from the JSON returned by the APIs.
+- Use bootstrap grid system for the layout of the website.
+- Use JQuery to append the DOM to display the weather in the correct areas.
+- Find the date using moment, and display in the correct way.
+- Store search information in local storage, and recall to display.
 
 ## What I learned:
 
-I learned in more detail how to use JavaScript logic to create complex functionality. Additionally I learned a lot about scope of functions, and how to structure your functions. Finally I learned a lot about manipulating the DOM to have a responsive website.
+I learned in more detail how to use third party APIs to return information. I now have a more in-depth understanding of how to extract the usable data from the large mass of data that an API returns. I learned how to use loops to append multiple parts of the DOM using less code.
 
 ## Preview:
 
 The website landing page as written in this repository should look like the following image:
 
-![Screen shot](assets/pictures/preview.png)
+![Screen shot](./assets/images/preview.png)
