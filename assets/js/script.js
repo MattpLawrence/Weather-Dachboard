@@ -46,6 +46,7 @@ function getWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
+      console.log(data);
       weatherToday(data);
       weatherFiveDay(data);
     })
