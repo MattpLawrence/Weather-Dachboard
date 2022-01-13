@@ -3,35 +3,60 @@ var searchBarListEL = $("#searchBarList");
 var searchBarEL = $("#searchBar");
 var searchBtnEL = $("#searchBtn");
 
-// ***********************************get location data***********************
-function getLocation(searchVal) {
-  $("#spinner").css("display", "flex"); //start spinner
-  const settings = {
-    async: true,
-    crossDomain: true,
-    url: `https://spott.p.rapidapi.com/places/autocomplete?limit=5&skip=0&country=US%2CCA&q=${searchVal}&type=CITY`,
-    method: "GET",
-    headers: {
-      "x-rapidapi-host": "spott.p.rapidapi.com",
-      "x-rapidapi-key": "4358a3ae45msh1ef514db96f084bp1426f0jsn143dce70b436",
-    },
-  };
+// ***********************************get location data *******************
+function fetchCoords(search) {
+  var apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${key}`;
 
-  $.getJSON(settings, function (data) {
-    try {
-      console.log(data);
-      var name = data[0].name;
-      var lat = data[0].coordinates.latitude;
-      var lon = data[0].coordinates.longitude;
-      $("#todayCityDiv").empty(); //clear DOM from past searches
-      getWeather(lat, lon);
-      todayLabel(name);
-    } catch {
-      console.log("no city found");
-      searchBarEL.text = "";
-    }
-  });
+  fetch(apiUrl)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      if (!data[0]) {
+        alert("Location not found");
+      } else {
+        console.log(data[0]);
+        var name = data[0].name;
+        var lat = data[0].lat;
+        var lon = data[0].lon;
+        $("#todayCityDiv").empty(); //clear DOM from past searches
+        getWeather(lat, lon);
+        todayLabel(name);
+      }
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
 }
+// ***********************************get location data *******************
+// function getLocation(searchVal) {
+//   $("#spinner").css("display", "flex"); //start spinner
+//   const settings = {
+//     async: true,
+//     crossDomain: true,
+//     url: `https://spott.p.rapidapi.com/places/autocomplete?limit=5&skip=0&country=US%2CCA&q=${searchVal}&type=CITY`,
+//     method: "GET",
+//     headers: {
+//       "x-rapidapi-host": "spott.p.rapidapi.com",
+//       "x-rapidapi-key": "4358a3ae45msh1ef514db96f084bp1426f0jsn143dce70b436",
+//     },
+//   };
+
+//   $.getJSON(settings, function (data) {
+//     try {
+//       console.log(data);
+//       var name = data[0].name;
+//       var lat = data[0].coordinates.latitude;
+//       var lon = data[0].coordinates.longitude;
+//       $("#todayCityDiv").empty(); //clear DOM from past searches
+//       getWeather(lat, lon);
+//       todayLabel(name);
+//     } catch {
+//       console.log("no city found");
+//       searchBarEL.text = "";
+//     }
+//   });
+// }
 //****************************Get weather data***************** */
 function getWeather(lat, lon) {
   var part = "alerts";
@@ -191,7 +216,8 @@ $(document).ready(function () {
   try {
     pastSearches = JSON.parse(localStorage["pastSearches"]);
     var lastVal = pastSearches[0]; //get last search from local storage
-    getLocation(lastVal);
+    // getLocation(lastVal);
+    fetchCoords(lastVal);
   } catch {
     //if no local storage default to atlanta
     var initVal = "Atlanta";
@@ -205,7 +231,8 @@ $(document).ready(function () {
 $(searchBtnEL).on("click", function (e) {
   var searchVal = searchBar.value;
   searchBarListEL.empty();
-  getLocation(searchVal);
+  fetchCoords(searchVal);
+  // getLocation(searchVal);
   saveSearchHistory(searchVal);
 });
 //on enter key press while in search bar run get location function
@@ -213,7 +240,8 @@ $(searchBarEL).on("keyup", function (e) {
   if (e.which == 13) {
     var searchVal = searchBar.value;
     searchBarListEL.empty();
-    getLocation(searchVal);
+    fetchCoords(searchVal);
+    // getLocation(searchVal);
     saveSearchHistory(searchVal);
   }
 });
@@ -221,5 +249,6 @@ $(searchBarEL).on("keyup", function (e) {
 $(searchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   var searchVal = textValue;
-  getLocation(searchVal);
+  // getLocation(searchVal);
+  fetchCoords(searchVal);
 });

@@ -11,9 +11,10 @@
 }
 /* *******************************Header****************** */
 header {
-  height: 5rem;
+  height: 4rem;
   background-color: var(--blue);
   padding: 1rem;
+  padding-top: 0.5rem;
   font-family: "Ubuntu", sans-serif;
   color: white;
   margin-bottom: 2rem;
