@@ -272,6 +272,9 @@ header button {
 .fiveDay h3 {
   display: inline;
 }
+.fiveDate {
+  font-size: 2.2em;
+}
 .fiveDay img {
   display: inline;
 }
