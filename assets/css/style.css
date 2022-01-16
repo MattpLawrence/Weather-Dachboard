@@ -26,6 +26,7 @@ header {
   /* /Remove "set heights" <--explicits height */
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: var(--blue);
   font-family: "Open Sans", sans-serif;
   font-weight: 900;
@@ -35,8 +36,8 @@ header {
 
 header h1 {
   font-size: 2em;
-  padding-top: 1em;
   padding-left: 1em;
+  margin: 0;
 }
 header button {
   justify-self: right;
@@ -263,6 +264,9 @@ div#weatherDays > div {
 
 /* *********************desktop format************ */
 @media all and (min-width: 980px) {
+  header h1 {
+    margin: 0.8em 0;
+  }
   #main {
     display: none;
   }
