@@ -74,6 +74,15 @@ header button {
   width: 100%;
   margin: 15px auto;
 }
+#sideSearchBar::after {
+  position: fixed;
+  display: inline;
+  content: "No City Found";
+  background-color: black;
+}
+#sideSearchBarList {
+  padding-left: 0;
+}
 #buttonSpinner {
   display: flex;
   transition: 2s;

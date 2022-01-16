@@ -2,6 +2,7 @@ var key = "168391797cc48918fbec2db27de39874";
 var searchBarListEL = $("#searchBarList");
 var sideSearchBarListEL = $("#sideSearchBarList");
 var searchBarEL = $("#searchBar");
+var sideSearchBarEL = $("#sideSearchBar");
 var searchBtnEL = $("#searchBtn");
 
 // ***********************************get location data *******************
@@ -201,12 +202,19 @@ function drawPastSearches() {
 
   if (pastSearches.length) {
     searchBarListEL.empty();
+    sideSearchBarListEL.empty();
     $.each(pastSearches, function (i, val) {
       var searchHistoryLI = $(`<li>`)
         .text(val)
         .attr("class", "searchHistoryLI");
       searchBarListEL.append(searchHistoryLI);
-      // sideSearchBarListEL.append(searchHistoryLI);
+    });
+    $.each(pastSearches, function (i, val) {
+      var searchHistoryLI = $(`<li>`)
+        .text(val)
+        .attr("class", "searchHistoryLI");
+
+      sideSearchBarListEL.append(searchHistoryLI);
     });
   }
 }
@@ -245,6 +253,33 @@ $(searchBarEL).on("keyup", function (e) {
 });
 //when search history item is clicked, search it again
 $(searchBarListEL).on("click", function (e) {
+  var textValue = e.target.innerText;
+  var searchVal = textValue;
+  fetchCoords(searchVal);
+  tryCloseNav();
+});
+
+// mobile version
+$("#sideSearchBtn").on("click", function (e) {
+  var searchVal = sideSearchBar.value;
+  sideSearchBarListEL.empty();
+  fetchCoords(searchVal);
+  tryCloseNav();
+  sideSearchBar.value = "";
+});
+//on enter key press while in search bar run get location function
+$(sideSearchBarEL).on("keyup", function (e) {
+  if (e.which == 13) {
+    var searchVal = sideSearchBar.value;
+    console.log(sideSearchBar);
+    searchBarListEL.empty();
+    fetchCoords(searchVal);
+    tryCloseNav();
+    sideSearchBar.value = "";
+  }
+});
+//when search history item is clicked, search it again
+$(sideSearchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   var searchVal = textValue;
   fetchCoords(searchVal);
