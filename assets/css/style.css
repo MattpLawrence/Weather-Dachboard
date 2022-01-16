@@ -1,9 +1,4 @@
 :root {
-  /* --blue: rgba(46, 66, 114, 1);
-  --lightestBlue: rgb(173, 207, 252);
-  --lightBlue: rgba(79, 98, 142, 1);
-  --darkBlue: rgba(22, 41, 85, 1);
-  --darkestBlue: rgba(6, 21, 57, 1); */
   --blue: rgba(19, 117, 226, 1); /* Main Primary color */
   --lightestBlue: rgb(101, 163, 232);
   --lightBlue: rgba(60, 140, 229, 1);
@@ -18,9 +13,6 @@ body {
   background-color: #e2e1e0;
   font-family: "open sans", sans-serif;
 }
-/* .row {
-  background-color: white;
-} */
 
 #mainRow {
   justify-content: center;
