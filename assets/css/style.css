@@ -338,3 +338,8 @@ div#weatherDays > div {
     display: block;
   }
 }
+@media all and (max-width: 350px) {
+  header #title {
+    font-size: 1.2em !important;
+  }
+}
