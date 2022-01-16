@@ -223,7 +223,7 @@ $(document).ready(function () {
   } catch {
     //if no local storage default to atlanta
     var initVal = "Atlanta";
-    getLocation(initVal);
+    fetchCoords(initVal);
   }
 });
 
@@ -236,10 +236,6 @@ $(searchBtnEL).on("click", function (e) {
   fetchCoords(searchVal);
   // getLocation(searchVal);
   saveSearchHistory(searchVal);
-<<<<<<< HEAD
-  tryCloseNav();
-=======
->>>>>>> parent of 0216be9 (fixed sidebar padding problem)
 });
 //on enter key press while in search bar run get location function
 $(searchBarEL).on("keyup", function (e) {
