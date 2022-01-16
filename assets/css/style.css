@@ -102,6 +102,12 @@ header button {
 #sideSearchBtn:hover {
   background-color: var(--lightestBlue);
 }
+.notFound {
+  font-size: 1.2;
+  list-style: none;
+  font-weight: 900;
+  color: var(--blue);
+}
 #searchBarList {
   padding-left: 0;
 }

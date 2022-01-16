@@ -14,12 +14,13 @@ function fetchCoords(search) {
     })
     .then(function (data) {
       if (!data[0]) {
+        $("#notFound").empty();
         let notFound = $("<li>")
           .text("Location not found.")
           .attr("class", "notFound");
         $("#notFound").append(notFound);
-        // alert("Location not found");
       } else {
+        $("#notFound").empty();
         console.log(data[0]);
         var name = data[0].name;
         var lat = data[0].lat;
@@ -27,6 +28,7 @@ function fetchCoords(search) {
         $("#todayCityDiv").empty(); //clear DOM from past searches
         getWeather(lat, lon);
         todayLabel(name);
+        saveSearchHistory(search);
       }
     })
     .catch(function (err) {
@@ -197,7 +199,9 @@ function drawPastSearches() {
   pastSearches = JSON.parse(localStorage["pastSearches"]); //retrieve from local storage
 
   if (pastSearches.length) {
+    searchBarListEL.empty();
     $.each(pastSearches, function (i, val) {
+      console.log("history called");
       var searchHistoryLI = $(`<li>`)
         .text(val)
         .attr("class", "searchHistoryLI");
@@ -206,15 +210,7 @@ function drawPastSearches() {
     });
   }
 }
-//show search history on load / toggle label visibility
-historyOnLoad();
-function historyOnLoad(e) {
-  try {
-    drawPastSearches();
-  } catch {
-    $("#searchHistoryLabel").css("display", "none");
-  }
-}
+
 //******************************************on load****************************
 //on load go to last history results, or default to atlanta
 $(document).ready(function () {
@@ -222,7 +218,6 @@ $(document).ready(function () {
   try {
     pastSearches = JSON.parse(localStorage["pastSearches"]);
     var lastVal = pastSearches[0]; //get last search from local storage
-    // getLocation(lastVal);
     fetchCoords(lastVal);
   } catch {
     //if no local storage default to atlanta
@@ -238,8 +233,6 @@ $(searchBtnEL).on("click", function (e) {
   var searchVal = searchBar.value;
   searchBarListEL.empty();
   fetchCoords(searchVal);
-  // getLocation(searchVal);
-  saveSearchHistory(searchVal);
 });
 //on enter key press while in search bar run get location function
 $(searchBarEL).on("keyup", function (e) {
@@ -247,8 +240,6 @@ $(searchBarEL).on("keyup", function (e) {
     var searchVal = searchBar.value;
     searchBarListEL.empty();
     fetchCoords(searchVal);
-    // getLocation(searchVal);
-    saveSearchHistory(searchVal);
     tryCloseNav();
   }
 });
@@ -256,7 +247,6 @@ $(searchBarEL).on("keyup", function (e) {
 $(searchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   var searchVal = textValue;
-  // getLocation(searchVal);
   fetchCoords(searchVal);
   tryCloseNav();
 });
