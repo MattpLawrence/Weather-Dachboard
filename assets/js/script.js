@@ -16,13 +16,19 @@ function fetchCoords(search) {
     .then(function (data) {
       if (!data[0]) {
         $("#notFound").empty();
+        $("#sideNotFound").empty();
         let notFound = $("<li>")
           .text("Location not found.")
           .attr("class", "notFound");
         $("#notFound").append(notFound);
+        let sideNotFound = $("<li>")
+          .text("Location not found.")
+          .attr("class", "notFound");
+        $("#sideNotFound").append(sideNotFound);
         drawPastSearches();
       } else {
         $("#notFound").empty();
+        $("#sideNotFound").empty();
         console.log(data[0]);
         var name = data[0].name;
         var lat = data[0].lat;
@@ -31,6 +37,7 @@ function fetchCoords(search) {
         getWeather(lat, lon);
         todayLabel(name);
         saveSearchHistory(search);
+        tryCloseNav();
       }
     })
     .catch(function (err) {
@@ -189,10 +196,12 @@ function saveSearchHistory(searchVal) {
   if (pastSearches.indexOf(searchVal) == -1) {
     pastSearches.unshift(searchVal);
     if (pastSearches.length > 10) {
+      console.log("greater than 10");
       pastSearches.pop();
     }
     localStorage["pastSearches"] = JSON.stringify(pastSearches);
   }
+  sideSearchBar.value = "";
   searchBar.value = ""; //clear search bar
   drawPastSearches();
 }
@@ -264,8 +273,6 @@ $("#sideSearchBtn").on("click", function (e) {
   var searchVal = sideSearchBar.value;
   sideSearchBarListEL.empty();
   fetchCoords(searchVal);
-  tryCloseNav();
-  sideSearchBar.value = "";
 });
 //on enter key press while in search bar run get location function
 $(sideSearchBarEL).on("keyup", function (e) {
@@ -274,8 +281,6 @@ $(sideSearchBarEL).on("keyup", function (e) {
     console.log(sideSearchBar);
     searchBarListEL.empty();
     fetchCoords(searchVal);
-    tryCloseNav();
-    sideSearchBar.value = "";
   }
 });
 //when search history item is clicked, search it again
@@ -283,7 +288,6 @@ $(sideSearchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   var searchVal = textValue;
   fetchCoords(searchVal);
-  tryCloseNav();
 });
 
 // ************************************sidebar function*****************
