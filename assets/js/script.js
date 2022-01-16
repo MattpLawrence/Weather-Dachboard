@@ -234,6 +234,12 @@ $(searchBtnEL).on("click", function (e) {
   fetchCoords(searchVal);
   // getLocation(searchVal);
   saveSearchHistory(searchVal);
+  try {
+    closeNav();
+  } catch {
+    console.log("nav not open");
+    return;
+  }
 });
 //on enter key press while in search bar run get location function
 $(searchBarEL).on("keyup", function (e) {

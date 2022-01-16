@@ -97,6 +97,14 @@ header button {
 
 /* *******************************sidebar nav for small screen******** */
 /* The sidebar menu */
+/* #mySidebar {
+  padding: 0 10px;
+  padding-top: 60px;
+} */
+.input-group {
+  padding: 0 10px;
+}
+
 .sidebar {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
