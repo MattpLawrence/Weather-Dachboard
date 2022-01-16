@@ -1,5 +1,6 @@
 var key = "168391797cc48918fbec2db27de39874";
 var searchBarListEL = $("#searchBarList");
+var sideSearchBarListEL = $("#sideSearchBarList");
 var searchBarEL = $("#searchBar");
 var searchBtnEL = $("#searchBtn");
 
@@ -197,6 +198,7 @@ function drawPastSearches() {
         .text(val)
         .attr("class", "searchHistoryLI");
       searchBarListEL.append(searchHistoryLI);
+      sideSearchBarListEL.append(searchHistoryLI);
     });
   }
 }
@@ -234,12 +236,7 @@ $(searchBtnEL).on("click", function (e) {
   fetchCoords(searchVal);
   // getLocation(searchVal);
   saveSearchHistory(searchVal);
-  try {
-    closeNav();
-  } catch {
-    console.log("nav not open");
-    return;
-  }
+  tryCloseNav();
 });
 //on enter key press while in search bar run get location function
 $(searchBarEL).on("keyup", function (e) {
@@ -249,6 +246,7 @@ $(searchBarEL).on("keyup", function (e) {
     fetchCoords(searchVal);
     // getLocation(searchVal);
     saveSearchHistory(searchVal);
+    tryCloseNav();
   }
 });
 //when search history item is clicked, search it again
@@ -257,6 +255,7 @@ $(searchBarListEL).on("click", function (e) {
   var searchVal = textValue;
   // getLocation(searchVal);
   fetchCoords(searchVal);
+  tryCloseNav();
 });
 
 // ************************************sidebar function*****************
@@ -270,4 +269,13 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
+}
+
+function tryCloseNav() {
+  try {
+    closeNav();
+  } catch {
+    console.log("nav not open");
+    return;
+  }
 }
