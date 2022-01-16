@@ -183,9 +183,10 @@ header button {
   cursor: pointer;
   background-color: var(--lightestBlue);
   color: rgb(104, 100, 100);
-
   padding: 10px 15px;
+  padding: auto;
   border: none;
+  transition-duration: 1s;
 }
 
 .openbtn:hover {
