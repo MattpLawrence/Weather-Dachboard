@@ -24,7 +24,19 @@
 <body>
   <header>
     <h1>Weather Dashboard</h1>
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
     
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
+      <!-- <h2>Collapsed Sidebar</h2>
+      <p>Content...</p> -->
+    </div>
   </header>
   <div class="container">
     <div id="mainRow" class="row">
@@ -56,11 +68,11 @@
               <h2>Five-Day Forecast:</h2>
             </div>
             <div class="row" id="weatherDays">
-              <div class="col-6 col-md-2" id="day1"></div>
-              <div class="col-6 col-md-2" id="day2"></div>
-              <div class="col-6 col-md-2" id="day3"></div>
-              <div class="col-6 col-md-2" id="day4"></div>
-              <div class="col-12 col-md-2" id="day5"></div>
+              <div class="col-12 col-md-2 fiveDay" id="day1"></div>
+              <div class="col-12 col-md-2 fiveDay" id="day2"></div>
+              <div class="col-12 col-md-2 fiveDay" id="day3"></div>
+              <div class="col-12 col-md-2 fiveDay" id="day4"></div>
+              <div class="col-12 col-md-2 fiveDay" id="day5"></div>
             </div>
           </div>
         </div>

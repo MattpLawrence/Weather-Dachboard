@@ -15,6 +15,8 @@
 /* *******************************Header****************** */
 header {
   /* /Remove "set heights" <--explicits height */
+  display: flex;
+  justify-content: space-between;
   background-color: var(--blue);
   padding: 1rem;
   padding-top: 0.5rem;
@@ -24,8 +26,18 @@ header {
   margin-bottom: 2rem;
 }
 
-/* *******************************Side bar****************** */
+header h1 {
+  font-size: 1.5 em;
+}
+header button {
+  justify-self: right;
+  padding: 0;
+}
 
+/* *******************************Side bar****************** */
+#sideBar {
+  display: none;
+}
 .centerLabel {
   text-align: center;
   font-family: "Ubuntu", sans-serif;
@@ -129,7 +141,7 @@ header {
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left 0.5s; /* If you want a transition effect */
-  padding: 20px;
+  padding: 20px 0;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -173,6 +185,7 @@ header {
 #weatherFiveDay {
   padding: 25px;
   margin-bottom: 25px;
+  /* box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%); */
 }
 
 #weatherDays {
@@ -186,6 +199,10 @@ header {
 
 #fiveDayLabel {
   height: auto;
+}
+
+.fiveDay {
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
 }
 
 .fiveDate {
