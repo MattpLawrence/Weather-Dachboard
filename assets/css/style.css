@@ -13,6 +13,7 @@
   justify-content: center;
 }
 /* *******************************Header****************** */
+
 header {
   /* /Remove "set heights" <--explicits height */
   display: flex;
@@ -94,7 +95,7 @@ header button {
   z-index: 1; /* Stay on top */
   top: 0;
   left: 0;
-  background-color: #111; /* Black*/
+  background-color: var(--lightestBlue); /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
@@ -128,8 +129,9 @@ header button {
 .openbtn {
   font-size: 20px;
   cursor: pointer;
-  background-color: #111;
-  color: white;
+  background-color: var(--lightestBlue);
+  color: rgb(104, 100, 100);
+  margin: 0 0 8px;
   padding: 10px 15px;
   border: none;
 }
@@ -140,8 +142,13 @@ header button {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
+  position: fixed;
+  right: 0;
   transition: margin-left 0.5s; /* If you want a transition effect */
-  padding: 20px 0;
+  /* padding: 20px 0; */
+}
+#main button {
+  height: 100px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -160,6 +167,13 @@ header button {
   padding: 25px;
   margin-bottom: 25px;
   box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+
+#weatherToday h1 {
+  font-size: 2em;
+}
+#weatherToday h2 {
+  font-size: 1.8em;
 }
 
 #todayCityDiv {
@@ -183,7 +197,6 @@ header button {
 }
 /* ****************************five day forecast************************** */
 #weatherFiveDay {
-  padding: 25px;
   margin-bottom: 25px;
   /* box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%); */
 }
@@ -203,6 +216,13 @@ header button {
 
 .fiveDay {
   box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+
+.fiveDay h3 {
+  display: inline;
+}
+.fiveDay img {
+  display: inline;
 }
 
 .fiveDate {
@@ -227,12 +247,18 @@ header button {
 
 div#weatherDays > div {
   margin: 5px 0;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  /* border-bottom: 3px solid rgba(0, 0, 0, 0.2); */
   /* box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%); */
 }
 
 /* *********************desktop format************ */
 @media all and (min-width: 980px) {
+  #main {
+    display: none;
+  }
+  #sideBar {
+    display: initial;
+  }
   #todayLabel {
     padding-top: 20px;
     padding-left: 40px;
