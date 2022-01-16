@@ -56,8 +56,20 @@ header button {
 .input-group {
   display: block;
   margin: 1px auto;
+  padding: 0em 0.5em;
 }
 #searchBar {
+  display: block;
+  width: 100%;
+  margin: 15px auto;
+}
+#searchBar::after {
+  position: fixed;
+  display: inline;
+  content: "No City Found";
+  background-color: black;
+}
+#sideSearchBar {
   display: block;
   width: 100%;
   margin: 15px auto;
@@ -78,6 +90,16 @@ header button {
   margin-bottom: 15px;
 }
 #searchBtn:hover {
+  background-color: var(--lightestBlue);
+}
+#sideSearchBtn {
+  display: block;
+  width: 100%;
+  background: var(--blue);
+  border-color: transparent;
+  margin-bottom: 15px;
+}
+#sideSearchBtn:hover {
   background-color: var(--lightestBlue);
 }
 #searchBarList {
@@ -264,6 +286,10 @@ div#weatherDays > div {
 
 /* *********************desktop format************ */
 @media all and (min-width: 980px) {
+  .input-group {
+    display: block;
+    margin: 1px auto;
+  }
   header h1 {
     margin: 0.8em 0;
   }

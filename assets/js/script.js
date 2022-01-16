@@ -14,7 +14,11 @@ function fetchCoords(search) {
     })
     .then(function (data) {
       if (!data[0]) {
-        alert("Location not found");
+        let notFound = $("<li>")
+          .text("Location not found.")
+          .attr("class", "notFound");
+        $("#notFound").append(notFound);
+        // alert("Location not found");
       } else {
         console.log(data[0]);
         var name = data[0].name;
@@ -198,7 +202,7 @@ function drawPastSearches() {
         .text(val)
         .attr("class", "searchHistoryLI");
       searchBarListEL.append(searchHistoryLI);
-      sideSearchBarListEL.append(searchHistoryLI);
+      // sideSearchBarListEL.append(searchHistoryLI);
     });
   }
 }
