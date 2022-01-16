@@ -1,6 +1,8 @@
 var key = "168391797cc48918fbec2db27de39874";
 var searchBarListEL = $("#searchBarList");
+var sideSearchBarListEL = $("#sideSearchBarList");
 var searchBarEL = $("#searchBar");
+var sideSearchBarEL = $("#sideSearchBar");
 var searchBtnEL = $("#searchBtn");
 
 // ***********************************get location data *******************
@@ -13,8 +15,20 @@ function fetchCoords(search) {
     })
     .then(function (data) {
       if (!data[0]) {
-        alert("Location not found");
+        $("#notFound").empty();
+        $("#sideNotFound").empty();
+        let notFound = $("<li>")
+          .text("Location not found.")
+          .attr("class", "notFound");
+        $("#notFound").append(notFound);
+        let sideNotFound = $("<li>")
+          .text("Location not found.")
+          .attr("class", "notFound");
+        $("#sideNotFound").append(sideNotFound);
+        drawPastSearches();
       } else {
+        $("#notFound").empty();
+        $("#sideNotFound").empty();
         console.log(data[0]);
         var name = data[0].name;
         var lat = data[0].lat;
@@ -22,6 +36,8 @@ function fetchCoords(search) {
         $("#todayCityDiv").empty(); //clear DOM from past searches
         getWeather(lat, lon);
         todayLabel(name);
+        saveSearchHistory(search);
+        tryCloseNav();
       }
     })
     .catch(function (err) {
@@ -180,10 +196,12 @@ function saveSearchHistory(searchVal) {
   if (pastSearches.indexOf(searchVal) == -1) {
     pastSearches.unshift(searchVal);
     if (pastSearches.length > 10) {
+      console.log("greater than 10");
       pastSearches.pop();
     }
     localStorage["pastSearches"] = JSON.stringify(pastSearches);
   }
+  sideSearchBar.value = "";
   searchBar.value = ""; //clear search bar
   drawPastSearches();
 }
@@ -192,23 +210,24 @@ function drawPastSearches() {
   pastSearches = JSON.parse(localStorage["pastSearches"]); //retrieve from local storage
 
   if (pastSearches.length) {
+    searchBarListEL.empty();
+    sideSearchBarListEL.empty();
     $.each(pastSearches, function (i, val) {
       var searchHistoryLI = $(`<li>`)
         .text(val)
         .attr("class", "searchHistoryLI");
       searchBarListEL.append(searchHistoryLI);
     });
+    $.each(pastSearches, function (i, val) {
+      var searchHistoryLI = $(`<li>`)
+        .text(val)
+        .attr("class", "searchHistoryLI");
+
+      sideSearchBarListEL.append(searchHistoryLI);
+    });
   }
 }
-//show search history on load / toggle label visibility
-historyOnLoad();
-function historyOnLoad(e) {
-  try {
-    drawPastSearches();
-  } catch {
-    $("#searchHistoryLabel").css("display", "none");
-  }
-}
+
 //******************************************on load****************************
 //on load go to last history results, or default to atlanta
 $(document).ready(function () {
@@ -216,12 +235,11 @@ $(document).ready(function () {
   try {
     pastSearches = JSON.parse(localStorage["pastSearches"]);
     var lastVal = pastSearches[0]; //get last search from local storage
-    // getLocation(lastVal);
     fetchCoords(lastVal);
   } catch {
     //if no local storage default to atlanta
     var initVal = "Atlanta";
-    getLocation(initVal);
+    fetchCoords(initVal);
   }
 });
 
@@ -232,8 +250,6 @@ $(searchBtnEL).on("click", function (e) {
   var searchVal = searchBar.value;
   searchBarListEL.empty();
   fetchCoords(searchVal);
-  // getLocation(searchVal);
-  saveSearchHistory(searchVal);
 });
 //on enter key press while in search bar run get location function
 $(searchBarEL).on("keyup", function (e) {
@@ -241,14 +257,57 @@ $(searchBarEL).on("keyup", function (e) {
     var searchVal = searchBar.value;
     searchBarListEL.empty();
     fetchCoords(searchVal);
-    // getLocation(searchVal);
-    saveSearchHistory(searchVal);
+    tryCloseNav();
   }
 });
 //when search history item is clicked, search it again
 $(searchBarListEL).on("click", function (e) {
   var textValue = e.target.innerText;
   var searchVal = textValue;
-  // getLocation(searchVal);
+  fetchCoords(searchVal);
+  tryCloseNav();
+});
+
+// mobile version
+$("#sideSearchBtn").on("click", function (e) {
+  var searchVal = sideSearchBar.value;
+  sideSearchBarListEL.empty();
   fetchCoords(searchVal);
 });
+//on enter key press while in search bar run get location function
+$(sideSearchBarEL).on("keyup", function (e) {
+  if (e.which == 13) {
+    var searchVal = sideSearchBar.value;
+    console.log(sideSearchBar);
+    searchBarListEL.empty();
+    fetchCoords(searchVal);
+  }
+});
+//when search history item is clicked, search it again
+$(sideSearchBarListEL).on("click", function (e) {
+  var textValue = e.target.innerText;
+  var searchVal = textValue;
+  fetchCoords(searchVal);
+});
+
+// ************************************sidebar function*****************
+/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+
+function tryCloseNav() {
+  try {
+    closeNav();
+  } catch {
+    console.log("nav not open");
+    return;
+  }
+}
