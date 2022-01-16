@@ -296,7 +296,7 @@ let titleEL = $("#title");
 function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
-  titleEL.css("font-size", "1em");
+  titleEL.css("font-size", "1.5em");
   $("#openBtn").css("display", "none");
 }
 
