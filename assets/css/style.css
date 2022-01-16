@@ -16,6 +16,7 @@
 }
 body {
   background-color: #e2e1e0;
+  font-family: "open sans", sans-serif;
 }
 /* .row {
   background-color: white;
@@ -33,7 +34,7 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: var(--blue);
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 900;
   color: white;
   margin-bottom: 2rem;
@@ -55,7 +56,6 @@ header button {
 }
 .centerLabel {
   text-align: center;
-  font-family: "Ubuntu", sans-serif;
   font-weight: bold;
 }
 .input-group {
@@ -130,7 +130,7 @@ header button {
   list-style-type: none;
   text-align: center;
   padding-left: 0;
-  font-family: "Ubuntu", sans-serif;
+
   font-size: 1.5rem;
 }
 .searchHistoryLI:hover {
