@@ -197,8 +197,8 @@ header button {
   transition: margin-left 0.5s; /* If you want a transition effect */
 }
 #main button {
-  height: 100px;
-  width: 100px;
+  height: 60px;
+  width: 60px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

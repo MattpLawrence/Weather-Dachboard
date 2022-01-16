@@ -297,6 +297,7 @@ function openNav() {
   document.getElementById("mySidebar").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
   titleEL.css("font-size", "1em");
+  $(".openbtn").css("display", "none");
 }
 
 /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
@@ -304,6 +305,7 @@ function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
   titleEL.css("font-size", "2em");
+  $(".openbtn").css("display", "initial");
 }
 
 function tryCloseNav() {
