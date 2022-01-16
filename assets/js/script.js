@@ -19,6 +19,7 @@ function fetchCoords(search) {
           .text("Location not found.")
           .attr("class", "notFound");
         $("#notFound").append(notFound);
+        drawPastSearches();
       } else {
         $("#notFound").empty();
         console.log(data[0]);
@@ -201,7 +202,6 @@ function drawPastSearches() {
   if (pastSearches.length) {
     searchBarListEL.empty();
     $.each(pastSearches, function (i, val) {
-      console.log("history called");
       var searchHistoryLI = $(`<li>`)
         .text(val)
         .attr("class", "searchHistoryLI");
