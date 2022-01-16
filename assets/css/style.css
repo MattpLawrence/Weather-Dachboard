@@ -233,9 +233,6 @@ header button {
   display: flex;
   flex-wrap: wrap;
 }
-#icon {
-  padding-left: 20px;
-}
 
 #weatherTodayUL {
   margin: 0;
@@ -245,7 +242,7 @@ header button {
   margin: 3px 0;
   list-style-type: none;
   color: var(--darkestBlue);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 /* ****************************five day forecast************************** */
@@ -279,24 +276,14 @@ header button {
   display: inline;
 }
 
-.fiveDate {
-  font-size: 1.2em;
-  text-align: center;
-  width: 100%;
-}
-
 .weatherLI {
-  margin: 7px auto;
+  margin: 0px auto;
   list-style-type: none;
   color: var(--darkestBlue);
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   font-weight: 500;
   width: 100%;
-}
-.iconFive {
   display: block;
-  margin: 0 auto;
-  justify-content: center;
 }
 
 div#weatherDays > div {
@@ -307,6 +294,9 @@ div#weatherDays > div {
 
 /* *********************desktop format************ */
 @media all and (min-width: 980px) {
+  #icon {
+    padding-left: 20px;
+  }
   .input-group {
     display: block;
     margin: 1px auto;
@@ -335,5 +325,15 @@ div#weatherDays > div {
   }
   div#weatherDays > div {
     box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+  }
+  .weatherLI {
+    margin: 7px auto;
+    font-size: 0.8rem;
+  }
+  .fiveDate {
+    font-size: 1em;
+  }
+  .fiveDay img {
+    display: block;
   }
 }
