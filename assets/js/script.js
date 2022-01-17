@@ -44,35 +44,7 @@ function fetchCoords(search) {
       console.error(err);
     });
 }
-// ***********************************get location data *******************
-// function getLocation(searchVal) {
-//   $("#spinner").css("display", "flex"); //start spinner
-//   const settings = {
-//     async: true,
-//     crossDomain: true,
-//     url: `https://spott.p.rapidapi.com/places/autocomplete?limit=5&skip=0&country=US%2CCA&q=${searchVal}&type=CITY`,
-//     method: "GET",
-//     headers: {
-//       "x-rapidapi-host": "spott.p.rapidapi.com",
-//       "x-rapidapi-key": "4358a3ae45msh1ef514db96f084bp1426f0jsn143dce70b436",
-//     },
-//   };
 
-//   $.getJSON(settings, function (data) {
-//     try {
-//       console.log(data);
-//       var name = data[0].name;
-//       var lat = data[0].coordinates.latitude;
-//       var lon = data[0].coordinates.longitude;
-//       $("#todayCityDiv").empty(); //clear DOM from past searches
-//       getWeather(lat, lon);
-//       todayLabel(name);
-//     } catch {
-//       console.log("no city found");
-//       searchBarEL.text = "";
-//     }
-//   });
-// }
 //****************************Get weather data***************** */
 function getWeather(lat, lon) {
   var part = "alerts";
@@ -186,20 +158,20 @@ function weatherFiveDay(data) {
 }
 
 // *****************************search history*********************
-var pastSearches = [];
+var pastSearch = [];
 
 function saveSearchHistory(searchVal) {
   $("#searchHistoryLabel").css("display", "block");
-  if (localStorage["pastSearches"]) {
-    pastSearches = JSON.parse(localStorage["pastSearches"]);
+  if (localStorage["pastSearch"]) {
+    pastSearch = JSON.parse(localStorage["pastSearch"]);
   }
-  if (pastSearches.indexOf(searchVal) == -1) {
-    pastSearches.unshift(searchVal);
-    if (pastSearches.length > 10) {
+  if (pastSearch.indexOf(searchVal) == -1) {
+    pastSearch.unshift(searchVal);
+    if (pastSearch.length > 10) {
       console.log("greater than 10");
-      pastSearches.pop();
+      pastSearch.pop();
     }
-    localStorage["pastSearches"] = JSON.stringify(pastSearches);
+    localStorage["pastSearch"] = JSON.stringify(pastSearch);
   }
   sideSearchBar.value = "";
   searchBar.value = ""; //clear search bar
@@ -207,18 +179,18 @@ function saveSearchHistory(searchVal) {
 }
 
 function drawPastSearches() {
-  pastSearches = JSON.parse(localStorage["pastSearches"]); //retrieve from local storage
+  pastSearch = JSON.parse(localStorage["pastSearch"]); //retrieve from local storage
 
-  if (pastSearches.length) {
+  if (pastSearch.length) {
     searchBarListEL.empty();
     sideSearchBarListEL.empty();
-    $.each(pastSearches, function (i, val) {
+    $.each(pastSearch, function (i, val) {
       var searchHistoryLI = $(`<li>`)
         .text(val)
         .attr("class", "searchHistoryLI");
       searchBarListEL.append(searchHistoryLI);
     });
-    $.each(pastSearches, function (i, val) {
+    $.each(pastSearch, function (i, val) {
       var searchHistoryLI = $(`<li>`)
         .text(val)
         .attr("class", "searchHistoryLI");
@@ -233,8 +205,8 @@ function drawPastSearches() {
 $(document).ready(function () {
   //catch error if no local storage can be parsed
   try {
-    pastSearches = JSON.parse(localStorage["pastSearches"]);
-    var lastVal = pastSearches[0]; //get last search from local storage
+    pastSearch = JSON.parse(localStorage["pastSearch"]);
+    var lastVal = pastSearch[0]; //get last search from local storage
     fetchCoords(lastVal);
   } catch {
     //if no local storage default to atlanta
