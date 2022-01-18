@@ -161,12 +161,19 @@ function weatherFiveDay(data) {
 var pastSearch = [];
 
 function saveSearchHistory(searchVal) {
+  const arrCap = searchVal.split(" ");
+  arrCap.forEach((word) => {
+    word = word.charAt(0).toUpperCase() + word.slice(1);
+  });
+  let searchValCap = arrCap.join(" ");
+  console.log(searchValCap);
+
   $("#searchHistoryLabel").css("display", "block");
   if (localStorage["pastSearch"]) {
     pastSearch = JSON.parse(localStorage["pastSearch"]);
   }
-  if (pastSearch.indexOf(searchVal) == -1) {
-    pastSearch.unshift(searchVal);
+  if (pastSearch.indexOf(searchValCap) == -1) {
+    pastSearch.unshift(searchValCap);
     if (pastSearch.length > 10) {
       console.log("greater than 10");
       pastSearch.pop();
